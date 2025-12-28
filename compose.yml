@@ -1,36 +1,39 @@
 ---
 services:
   db:
-    image: prashanthkumar18/apprepo:dbimage
+    image: prashanthkumar18/apprepo-1:dbimage
     deploy:
       replicas: 1
     ports:
       - "3306:3306"
       
   auth_service:
-    image: prashanthkumar18/apprepo:authimage
+    image: prashanthkumar18/apprepo-1:authimage
     deploy:
       replicas: 2
     ports:
       - "5001:50001"
       
   book_service:
-    image: prashanthkumar18/apprepo:bookimage
+    image: prashanthkumar18/apprepo-1:bookimage
     deploy:
       replicas: 2
     ports:
       - "5002:50002"
    
   borrow_service:
-    image: prashanthkumar18/apprepo:borrowimage
+    image: prashanthkumar18/apprepo-1:borrowimage
     ports:
       - "5003:5003"
     deploy:
       replicas: 3
 
   frontend:
-    image: prashanthkumar18/apprepo:frontendimage
+    image: prashanthkumar18/apprepo-1:frontendimage
     ports:
       - "5000:5000"
     deploy:
       replicas: 2
+
+  depends_on:
+     - "db"
